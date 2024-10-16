@@ -59,8 +59,20 @@ public class Keys {
         }
     }
 
-    private ArrayList<ArrayList<String>> findCombinations () {
-        //todo сделать говнокод в любом виде и любой ценой
+    private ArrayList<ArrayList<String>> findCombinations() {
+        ArrayList<ArrayList<String>> combinations = new ArrayList<>();
+        findCombinationsRecursive(variables, new ArrayList<>(), 0, combinations);
+        return combinations;
+    }
+
+    private void findCombinationsRecursive(ArrayList<String> elements, ArrayList<String> currentCombination, int index, ArrayList<ArrayList<String>> combinations) {
+        combinations.add(new ArrayList<>(currentCombination));
+
+        for (int i = index; i < elements.size(); i++) {
+            currentCombination.add(elements.get(i));
+            findCombinationsRecursive(elements, currentCombination, i + 1, combinations);
+            currentCombination.removeLast();
+        }
     }
 
     private void checkDependencies(ArrayList<String> extension) {

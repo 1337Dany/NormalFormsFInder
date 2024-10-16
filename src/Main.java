@@ -1,3 +1,7 @@
 public class Main {
-    //todo: created new project
+    public static void main(String[] args) {
+
+        NFDeterminer nfDeterminer = new NFDeterminer();
+
+    }
 }

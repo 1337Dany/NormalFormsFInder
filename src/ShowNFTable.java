@@ -48,9 +48,9 @@ public class ShowNFTable {
     }
 
     private void showKeys() {
-        for (int i = 0; i < key.getKeys().size(); i++) {
+        for (int i = 0; i < Keys.getKeys().size(); i++) {
             System.out.println("K" + i + " = ");
-            System.out.println(getArrayDataAsLine(key.getKeys().get(i)));
+            System.out.println(getArrayDataAsLine(Keys.getKeys().get(i)));
         }
     }
 }

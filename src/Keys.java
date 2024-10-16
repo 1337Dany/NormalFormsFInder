@@ -8,7 +8,6 @@ public class Keys {
         keyArguments = new ArrayList<>();
     }
 
-    private final Dependency dependency;
 
     private final ArrayList<String> variables;
     private final ArrayList<String> unobtainable;
@@ -23,22 +22,21 @@ public class Keys {
         return keyArguments;
     }
 
-    public Keys(Dependency dependency, Relation relation) {
-        this.dependency = dependency;
+    public Keys() {
 
-        this.variables = new ArrayList<>(relation.relation);
+        this.variables = new ArrayList<>(Relation.getRelation());
 
-        this.unobtainable = new ArrayList<>(relation.relation);
+        this.unobtainable = new ArrayList<>(Relation.getRelation());
         checkObtainable();
 
-        this.availableAttributes = new ArrayList<>(relation.relation);
+        this.availableAttributes = new ArrayList<>(Relation.getRelation());
         availableAttributes.removeAll(unobtainable);
 
         findKeys();
     }
 
     private void checkObtainable() {
-        for (ArrayList<String> leftHandSide : dependency.getDependencies().keySet()) {
+        for (ArrayList<String> leftHandSide : Dependency.getDependencies().keySet()) {
             for (String rightVar : dependency.dependencies.get(leftHandSide)) {
                 unobtainable.remove(rightVar);
             }

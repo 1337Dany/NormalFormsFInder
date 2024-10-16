@@ -1,11 +1,7 @@
 import java.util.*;
 
 public class Dependency {
-    Map<ArrayList<String>, ArrayList<String>> dependencies = new HashMap<>();
-
-    public Map<ArrayList<String>, ArrayList<String>> getDependencies() {
-        return dependencies;
-    }
+    private final static Map<ArrayList<String>, ArrayList<String>> dependencies = new HashMap<>();
 
     Dependency(Scanner scanner) {
 
@@ -47,7 +43,7 @@ public class Dependency {
         );
     }
 
-    public Map<ArrayList<String>, ArrayList<String>> getDependencies() {
+    public static Map<ArrayList<String>, ArrayList<String>> getDependencies() {
         return dependencies;
     }
 }

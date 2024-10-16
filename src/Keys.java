@@ -37,7 +37,7 @@ public class Keys {
 
     private void checkObtainable() {
         for (ArrayList<String> leftHandSide : Dependency.getDependencies().keySet()) {
-            for (String rightVar : dependency.dependencies.get(leftHandSide)) {
+            for (String rightVar : Dependency.getDependencies().get(leftHandSide)) {
                 unobtainable.remove(rightVar);
             }
         }
@@ -93,10 +93,10 @@ public class Keys {
         while (extended) {
             extended = false;
 
-            for (ArrayList<String> leftHandSide : dependency.getDependencies().keySet()) {
+            for (ArrayList<String> leftHandSide : Dependency.getDependencies().keySet()) {
 
                 if (isSuperset(temporaryKey, leftHandSide)) {
-                    for (String rightVar : dependency.dependencies.get(leftHandSide)) {
+                    for (String rightVar : Dependency.getDependencies().get(leftHandSide)) {
 
                         if (!temporaryKey.contains(rightVar)) {
                             temporaryKey.add(rightVar);

@@ -1,22 +1,34 @@
 import java.util.ArrayList;
 
 public class Keys {
-    public ArrayList<ArrayList<String>> keys;
-    public ArrayList<String> keyArguments;
-    public Dependency dependency;
+    private static final ArrayList<ArrayList<String>> keys;
+    private static final ArrayList<String> keyArguments;
+    static {
+        keys = new ArrayList<>();
+        keyArguments = new ArrayList<>();
+    }
 
-    public ArrayList<String> variables;
-    public ArrayList<String> unobtainable;
-    public ArrayList<String> availableAttributes;
+    private final Dependency dependency;
 
-    public ArrayList<String> temporaryKey;
+    private final ArrayList<String> variables;
+    private final ArrayList<String> unobtainable;
+    private final ArrayList<String> availableAttributes;
 
+    private ArrayList<String> temporaryKey;
+
+    public static ArrayList<ArrayList<String>> getKeys() {
+        return keys;
+    }
+    public static ArrayList<String> getKeyArguments() {
+        return keyArguments;
+    }
 
     public Keys(Dependency dependency, Relation relation) {
         this.dependency = dependency;
 
         this.variables = new ArrayList<>(relation.relation);
 
+        this.unobtainable = new ArrayList<>(relation.relation);
         checkObtainable();
 
         this.availableAttributes = new ArrayList<>(relation.relation);
@@ -44,16 +56,16 @@ public class Keys {
 
         for (ArrayList<String> possibleKey : possibleKeys) {
             boolean hasSubsets = false;
-            for (ArrayList<String> comparedTo : keys) {
+            for (ArrayList<String> comparedTo : Keys.keys) {
                 if (isSubset(possibleKey, comparedTo)) {
                     hasSubsets = true;
                     break;
                 }
             }
             if (!hasSubsets) {
-                keys.add(possibleKey);
+                Keys.keys.add(possibleKey);
                 for (String attribute : possibleKey) {
-                    if (!keyArguments.contains(attribute)) keyArguments.add(attribute);
+                    if (!Keys.keyArguments.contains(attribute)) Keys.keyArguments.add(attribute);
                 }
             }
         }
@@ -61,7 +73,7 @@ public class Keys {
 
     private ArrayList<ArrayList<String>> findCombinations() {
         ArrayList<ArrayList<String>> combinations = new ArrayList<>();
-        findCombinationsRecursive(variables, new ArrayList<>(), 0, combinations);
+        findCombinationsRecursive(availableAttributes, new ArrayList<>(), 0, combinations);
         return combinations;
     }
 

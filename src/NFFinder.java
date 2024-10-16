@@ -44,8 +44,23 @@ public class NFFinder {
         return false;
     }
 
-    public static String findNormalForm(){
+    public static String findNormalForm() {
+        boolean twoNF = true;
+        boolean threeNF = true;
+        boolean BCNF = true;
+        for (ArrayList<String> key : Dependency.getDependencies().keySet()) {
+            if (BCNF && (isTrivialDependancy(key) || XIsSuperkey(key))) {
+                BCNF = false;
+            }
+            if (threeNF && AIsKeyAttribute(key)) {
+                threeNF = false;
+            }
+            if (twoNF && isPartialDependancy(key)) {
+                twoNF = false;
+            }
 
+        }
+        return BCNF ? "BCNF" : threeNF ? "3NF" : twoNF ? "2NF" : "Neither";
     }
 
 

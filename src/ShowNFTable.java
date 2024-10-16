@@ -4,6 +4,10 @@ public class ShowNFTable {
 
     ArrayList<String> dependencyList = new ArrayList<>();
 
+    public ShowNFTable() {
+        showResult();
+    }
+
     private void showResult() {
         int columnWidth = 15;
 

@@ -4,6 +4,7 @@ public class NFDeterminer {
     Relation relation;
     Dependency dependency;
 
+    Keys keys = new Keys();
 
     NFDeterminer() {
         Scanner scanner = new Scanner(System.in);
@@ -11,6 +12,6 @@ public class NFDeterminer {
         relation = new Relation(scanner);
         dependency = new Dependency(scanner);
 
-
+        ShowNFTable showNFTable = new ShowNFTable();
     }
 }

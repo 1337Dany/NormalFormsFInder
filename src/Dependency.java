@@ -3,6 +3,10 @@ import java.util.*;
 public class Dependency {
     Map<ArrayList<String>, ArrayList<String>> dependencies = new HashMap<>();
 
+    public Map<ArrayList<String>, ArrayList<String>> getDependencies() {
+        return dependencies;
+    }
+
     Dependency(Scanner scanner) {
 
         System.out.println("Write dependencies:\t(Example: A,B->C)");
@@ -41,9 +45,5 @@ public class Dependency {
                     }
                 }
         );
-    }
-
-    public Map<ArrayList<String>, ArrayList<String>> getDependencies() {
-        return dependencies;
     }
 }

@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class NFDeterminer {
     Relation relation;
     Dependency dependency;
-
     Keys keys;
 
     NFDeterminer() {

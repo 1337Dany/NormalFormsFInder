@@ -21,8 +21,8 @@ public class ShowNFTable {
         for (ArrayList<String> key : Dependency.getDependencies().keySet()) {
 
             String value1 = getArrayDataAsLine(key) + " -> " + getArrayDataAsLine(Dependency.getDependencies().get(key));
-            String value2 = NFFinder.isTrivialDependancy(key) ? "T" : "F";
-            String value3 = NFFinder.XIsSuperkey(key) ? "T" : "F";
+            String value2 = NFFinder.isTrivialDependency(key) ? "T" : "F";
+            String value3 = NFFinder.XIsSuperKey(key) ? "T" : "F";
             String value4 = NFFinder.AIsKeyAttribute(key) ? "T" : "F";
             String value5 = !NFFinder.isPartialDependency(key)? "T" : "F";
 

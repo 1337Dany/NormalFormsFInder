@@ -38,8 +38,7 @@ public class NFFinder {
             } else {
                 String compare1 = String.valueOf(Keys.getKeys().get(i));
                 String compare2 = String.valueOf(key);
-                if(compare1.contains(compare2))
-                    return false;
+                return !compare1.contains(compare2);
             }
         }
         return false;
@@ -48,18 +47,19 @@ public class NFFinder {
     public static String findNormalForm() {
         boolean twoNF = true;
         boolean threeNF = true;
-        boolean BCNF = true;
+        boolean BCNF1 = true;
+        boolean BCNF2 = true;
 
         //Check is trivial dep?
         for (ArrayList<String> key : Dependency.getDependencies().keySet()) {
-            if (BCNF) {
-                if (BCNF != isTrivialDependancy(key)) {
-                    BCNF = false;
+            if (BCNF1) {
+                if (BCNF1 != isTrivialDependancy(key)) {
+                    BCNF1 = false;
                 }
             }
-            if (BCNF) {
-                if (BCNF != XIsSuperkey(key)) {
-                    BCNF = false;
+            if(BCNF2){
+                if (BCNF2 != XIsSuperkey(key)) {
+                    BCNF2 = false;
                 }
             }
             if (threeNF) {
@@ -74,7 +74,7 @@ public class NFFinder {
             }
         }
 
-        return BCNF ? "BCNF" : threeNF ? "3NF" : twoNF ? "2NF" : "Neither";
+        return BCNF1 || BCNF2 ? "BCNF" : threeNF ? "3NF" : twoNF ? "2NF" : "Neither";
     }
 
 

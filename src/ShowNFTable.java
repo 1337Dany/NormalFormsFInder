@@ -2,14 +2,11 @@ import java.util.ArrayList;
 
 public class ShowNFTable {
 
-    ArrayList<String> dependencyList = new ArrayList<>();
-
     public ShowNFTable() {
         showResult();
     }
 
     private void showResult() {
-        int columnWidth = 15;
 
         System.out.println("-----------------------");
         System.out.println("Keys:");
@@ -18,10 +15,8 @@ public class ShowNFTable {
 
         String relation = String.valueOf(Relation.getRelation());
 
-        System.out.printf("%-" + columnWidth + "s%-" + columnWidth + "s%-" + columnWidth + "s%-" + columnWidth + "s%-"
-                        + columnWidth + "s%n",
-                relation,
-                "Trivial dep.", "X is a super key", "A is key attribute", "Not a pratial dep.");
+        System.out.printf("%-15s %-15s %-20s %-20s %-20s%n",
+                relation, "Trivial dep.", "X is a super key", "A is key attribute", "Not a pratial dep.");
 
         for (ArrayList<String> key : Dependency.getDependencies().keySet()) {
 
@@ -31,9 +26,7 @@ public class ShowNFTable {
             String value4 = NFFinder.AIsKeyAttribute(key) ? "T" : "F";
             String value5 = NFFinder.isPartialDependancy(key)? "T" : "F";
 
-                    System.out.printf("%" + (columnWidth + value1.length()) / 2 + "s%" + (columnWidth + value2.length()) / 2 + "s%"
-                            + (columnWidth + value3.length()) / 2 + "s%" + (columnWidth + value4.length()) / 2 + "s%"
-                            + (columnWidth + value5.length()) / 2 + "s%n", value1, value2, value3, value4, value5);
+            System.out.printf("%-15s %-15s %-20s %-20s %-20s%n", value1,value2,value3,value4,value5);
 
         }
 
@@ -44,11 +37,11 @@ public class ShowNFTable {
     }
 
     private String getArrayDataAsLine(ArrayList<String> arrayList) {
-        String line = "";
+        StringBuilder line = new StringBuilder();
         for (String s : arrayList) {
-            line += s ;
+            line.append(s);
         }
-        return line;
+        return line.toString();
     }
 
     private void showKeys() {

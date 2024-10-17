@@ -48,12 +48,14 @@ public class Keys {
         ArrayList<ArrayList<String>> possibleKeys = new ArrayList<>();
         for (ArrayList<String> combination : findCombinations()) {
             combination.addAll(unobtainable);
+            System.out.println("comb: " + combination);
             checkDependencies(combination);
-            if (isIdentical(temporaryKey, variables)) {
+            if (isIdentical(temporaryKey, variables) && !combination.isEmpty()) {
                 possibleKeys.add(combination);
             }
             temporaryKey = null;
         }
+        System.out.println("poss: " + possibleKeys);
         for (ArrayList<String> possibleKey : possibleKeys) {
             boolean hasSubsets = false;
             for (ArrayList<String> comparedTo : Keys.keys) {
@@ -68,6 +70,7 @@ public class Keys {
                     if (!Keys.keyArguments.contains(attribute)) Keys.keyArguments.add(attribute);
                 }
             }
+            System.out.println("keys: " + keys);
         }
     }
 

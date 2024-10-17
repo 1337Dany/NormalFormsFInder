@@ -12,7 +12,7 @@ public class ShowNFTable {
         int columnWidth = 15;
 
         System.out.println("-----------------------");
-        System.out.print("Keys:");
+        System.out.println("Keys:");
         showKeys();
         System.out.println("-----------------------");
 
@@ -53,7 +53,7 @@ public class ShowNFTable {
 
     private void showKeys() {
         for (int i = 0; i < Keys.getKeys().size(); i++) {
-            System.out.println("K" + i + " = ");
+            System.out.print("K" + i + " = ");
             System.out.println(getArrayDataAsLine(Keys.getKeys().get(i)));
         }
     }

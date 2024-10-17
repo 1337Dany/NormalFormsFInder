@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class NFFinder {
@@ -35,10 +36,10 @@ public class NFFinder {
             if (key.equals(Keys.getKeys().get(i))) {
                 return true;
             } else {
-                for (int j = 0; j < Keys.getKeys().get(i).size(); j++) {
-                    if (Keys.getKeys().get(i).get(j).equals(key.get(j)))
-                        return false;
-                }
+                String compare1 = String.valueOf(Keys.getKeys().get(i));
+                String compare2 = String.valueOf(key);
+                if(compare1.contains(compare2))
+                    return false;
             }
         }
         return false;
@@ -48,20 +49,31 @@ public class NFFinder {
         boolean twoNF = true;
         boolean threeNF = true;
         boolean BCNF = true;
+
+        //Check is trivial dep?
         for (ArrayList<String> key : Dependency.getDependencies().keySet()) {
-            if (BCNF && (isTrivialDependancy(key) || XIsSuperkey(key))) {
-                BCNF = false;
+            if (BCNF) {
+                if (BCNF != isTrivialDependancy(key)) {
+                    BCNF = false;
+                }
+            }
+            if (BCNF) {
+                if (BCNF != XIsSuperkey(key)) {
+                    BCNF = false;
+                }
             }
             if (threeNF) {
-                if (AIsKeyAttribute(key)) {
+                if (threeNF != AIsKeyAttribute(key)) {
                     threeNF = false;
                 }
             }
-            if (twoNF && isPartialDependancy(key)) {
-                twoNF = false;
+            if (twoNF) {
+                if (twoNF != isPartialDependancy(key)) {
+                    twoNF = false;
+                }
             }
-
         }
+
         return BCNF ? "BCNF" : threeNF ? "3NF" : twoNF ? "2NF" : "Neither";
     }
 

@@ -47,9 +47,10 @@ public class Keys {
     private void findKeys() {
         ArrayList<ArrayList<String>> possibleKeys = new ArrayList<>();
         for (ArrayList<String> combination : findCombinations()) {
+            combination.addAll(unobtainable);
             checkDependencies(combination);
             if (isIdentical(temporaryKey, variables)) {
-                possibleKeys.add(temporaryKey);
+                possibleKeys.add(combination);
             }
         }
 
@@ -88,8 +89,7 @@ public class Keys {
     }
 
     private void checkDependencies(ArrayList<String> extension) {
-        temporaryKey = new ArrayList<>(unobtainable);
-        temporaryKey.addAll(extension);
+        temporaryKey = new ArrayList<>(extension);
 
         boolean extended = true;
         while (extended) {

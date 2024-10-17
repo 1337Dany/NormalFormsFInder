@@ -23,16 +23,20 @@ public class NFFinder {
         return false;
     }
 
-    public static boolean AIsKeyAttribute(ArrayList<String> key) {
-        for (int i = 0; i < Keys.getKeys().size(); i++) {
-            if (Keys.getKeys().get(i).contains(Dependency.getDependencies().get(key)))
-                return true;
+    public static boolean AIsKeyAttribute(ArrayList<String> mapKey) {
+        return SetOperations.isSubset(Dependency.getDependencies().get(mapKey), Keys.getKeyArguments());
+        /*for (String rightHandSide : Dependency.getDependencies().get(key)) {
+            if (!Keys.getKeyArguments().contains(rightHandSide)) return false;
         }
-        return false;
+        return true;*/
     }
 
-    public static boolean isPartialDependancy(ArrayList<String> key) {
-        for (int i = 0; i < Keys.getKeys().size(); i++) {
+    public static boolean isPartialDependency(ArrayList<String> leftHandSide) {
+        for (ArrayList<String> key : Keys.getKeys()) {
+            if (SetOperations.isProperSubset(leftHandSide, key)) return true;
+        }
+        return false;
+        /*for (int i = 0; i < Keys.getKeys().size(); i++) {
             if (key.equals(Keys.getKeys().get(i))) {
                 return true;
             } else {
@@ -41,7 +45,7 @@ public class NFFinder {
                 return !compare1.contains(compare2);
             }
         }
-        return false;
+        return false;*/
     }
 
     public static String findNormalForm() {
@@ -68,7 +72,7 @@ public class NFFinder {
                 }
             }
             if (twoNF) {
-                if (twoNF != isPartialDependancy(key)) {
+                if (twoNF == isPartialDependency(key)) {
                     twoNF = false;
                 }
             }

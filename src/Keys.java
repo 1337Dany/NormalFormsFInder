@@ -50,16 +50,18 @@ public class Keys {
             combination.addAll(unobtainable);
             System.out.println("comb: " + combination);
             checkDependencies(combination);
-            if (isIdentical(temporaryKey, variables) && !combination.isEmpty()) {
+            if (SetOperations.isIdentical(temporaryKey, variables) && !combination.isEmpty()) {
                 possibleKeys.add(combination);
             }
             temporaryKey = null;
         }
         System.out.println("poss: " + possibleKeys);
+
         for (ArrayList<String> possibleKey : possibleKeys) {
             boolean hasSubsets = false;
-            for (ArrayList<String> comparedTo : Keys.keys) {
-                if (isSubset(comparedTo, possibleKey)) {
+            for (ArrayList<String> comparedTo : possibleKeys) {
+                if (SetOperations.isSubset(comparedTo, possibleKey) &&
+                        !(possibleKey.size() == comparedTo.size())) {
                     hasSubsets = true;
                     break;
                 }
@@ -92,6 +94,7 @@ public class Keys {
 
     private void checkDependencies(ArrayList<String> combination) {
         temporaryKey = new ArrayList<>(combination);
+        System.out.println("temporaryKey: " + temporaryKey);
 
         boolean extended = true;
         while (extended) {
@@ -99,7 +102,7 @@ public class Keys {
 
             for (ArrayList<String> leftHandSide : Dependency.getDependencies().keySet()) {
 
-                if (isSuperset(temporaryKey, leftHandSide)) {
+                if (SetOperations.isSuperset(temporaryKey, leftHandSide)) {
                     for (String rightVar : Dependency.getDependencies().get(leftHandSide)) {
 
                         if (!temporaryKey.contains(rightVar)) {
@@ -112,26 +115,6 @@ public class Keys {
             }
 
         }
-    }
-
-    private static boolean isSuperset(ArrayList<String> superset, ArrayList<String> set) {
-        for (String val : set) {
-            if (!superset.contains(val)) return false;
-        }
-        return true;
-    }
-
-    private static boolean isSubset(ArrayList<String> subset, ArrayList<String> set) {
-        for (String val : subset) {
-            if (!set.contains(val)) return false;
-        }
-        return true;
-    }
-
-    private static boolean isIdentical(ArrayList<String> a, ArrayList<String> b) {
-        for (String val : a) {
-            if (!b.contains(val)) return false;
-        }
-        return true;
+        System.out.println("temporaryKeyAfter: " + temporaryKey);
     }
 }

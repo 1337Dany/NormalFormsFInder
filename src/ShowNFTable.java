@@ -24,7 +24,7 @@ public class ShowNFTable {
             String value2 = NFFinder.isTrivialDependancy(key) ? "T" : "F";
             String value3 = NFFinder.XIsSuperkey(key) ? "T" : "F";
             String value4 = NFFinder.AIsKeyAttribute(key) ? "T" : "F";
-            String value5 = NFFinder.isPartialDependancy(key)? "T" : "F";
+            String value5 = !NFFinder.isPartialDependency(key)? "T" : "F";
 
             System.out.printf("%-15s %-15s %-20s %-20s %-20s%n", value1,value2,value3,value4,value5);
 

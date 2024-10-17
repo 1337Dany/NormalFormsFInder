@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-//todo fix this shit
+
 public class Keys {
     private static final ArrayList<ArrayList<String>> keys;
     private static final ArrayList<String> keyArguments;
@@ -52,6 +52,7 @@ public class Keys {
             if (isIdentical(temporaryKey, variables)) {
                 possibleKeys.add(combination);
             }
+            temporaryKey = null;
         }
 
         for (ArrayList<String> possibleKey : possibleKeys) {
@@ -88,8 +89,8 @@ public class Keys {
         }
     }
 
-    private void checkDependencies(ArrayList<String> extension) {
-        temporaryKey = new ArrayList<>(extension);
+    private void checkDependencies(ArrayList<String> combination) {
+        temporaryKey = new ArrayList<>(combination);
 
         boolean extended = true;
         while (extended) {

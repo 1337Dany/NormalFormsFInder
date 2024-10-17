@@ -1,11 +1,8 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
 
 public class NFFinder {
 
     public static boolean isTrivialDependancy(ArrayList<String> key) {
-        boolean result;
         for (int i = 0; i < key.size(); i++) {
             for (int j = 0; j < Dependency.getDependencies().get(key).size(); j++) {
                 if (key.get(i).equals(Dependency.getDependencies().get(key).get(j)))

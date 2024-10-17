@@ -48,17 +48,18 @@ public class Keys {
         ArrayList<ArrayList<String>> possibleKeys = new ArrayList<>();
         for (ArrayList<String> combination : findCombinations()) {
             combination.addAll(unobtainable);
+            System.out.println(combination);
             checkDependencies(combination);
             if (isIdentical(temporaryKey, variables)) {
                 possibleKeys.add(combination);
             }
             temporaryKey = null;
         }
-
+        System.out.println(possibleKeys);
         for (ArrayList<String> possibleKey : possibleKeys) {
             boolean hasSubsets = false;
             for (ArrayList<String> comparedTo : Keys.keys) {
-                if (isSubset(possibleKey, comparedTo)) {
+                if (isSubset(comparedTo, possibleKey)) {
                     hasSubsets = true;
                     break;
                 }

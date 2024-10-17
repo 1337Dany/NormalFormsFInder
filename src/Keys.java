@@ -33,6 +33,7 @@ public class Keys {
         availableAttributes.removeAll(unobtainable);
 
         findKeys();
+        System.out.println(Keys.getKeys());
     }
 
     private void checkObtainable() {
@@ -62,6 +63,7 @@ public class Keys {
             }
             if (!hasSubsets) {
                 Keys.keys.add(possibleKey);
+                System.out.println(keys);
                 for (String attribute : possibleKey) {
                     if (!Keys.keyArguments.contains(attribute)) Keys.keyArguments.add(attribute);
                 }

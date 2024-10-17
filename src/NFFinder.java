@@ -52,8 +52,10 @@ public class NFFinder {
             if (BCNF && (isTrivialDependancy(key) || XIsSuperkey(key))) {
                 BCNF = false;
             }
-            if (threeNF && AIsKeyAttribute(key)) {
-                threeNF = false;
+            if (threeNF) {
+                if (AIsKeyAttribute(key)) {
+                    threeNF = false;
+                }
             }
             if (twoNF && isPartialDependancy(key)) {
                 twoNF = false;

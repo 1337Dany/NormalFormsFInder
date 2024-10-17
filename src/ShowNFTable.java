@@ -7,7 +7,6 @@ public class ShowNFTable {
     }
 
     private void showResult() {
-        int columnWidth = 15;
 
         System.out.println("-----------------------");
         System.out.println("Keys:");
@@ -38,11 +37,11 @@ public class ShowNFTable {
     }
 
     private String getArrayDataAsLine(ArrayList<String> arrayList) {
-        String line = "";
+        StringBuilder line = new StringBuilder();
         for (String s : arrayList) {
-            line += s ;
+            line.append(s);
         }
-        return line;
+        return line.toString();
     }
 
     private void showKeys() {
